@@ -65,6 +65,7 @@ def get_calendar_schedule(
         end_time
     )
 
+app = mcp.http_app()
 
 if __name__ == "__main__":
     mcp.run(
