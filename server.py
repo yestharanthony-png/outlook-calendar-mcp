@@ -31,34 +31,40 @@ def list_calendar_events(user_email: str):
 
 @mcp.tool()
 def create_calendar_event(
-    organizer: str,
+    user_email: str,
     subject: str,
     start_time: str,
     end_time: str,
     attendees: list[str] = [],
 ):
     """
-    Create a meeting with attendees.
+    Create a new Outlook calendar meeting.
     """
 
-    attendee_list = [
+    print("===================================")
+    print("CREATE CALENDAR EVENT")
+    print("Organizer :", user_email)
+    print("Subject   :", subject)
+    print("Start     :", start_time)
+    print("End       :", end_time)
+    print("Attendees :", attendees)
+    print("===================================")
+
+    attendee_objects = [
         {
-            "emailAddress": {
-                "address": email
-            },
+            "emailAddress": {"address": email},
             "type": "required"
         }
         for email in attendees
     ]
 
     return create_event(
-        user_email=organizer,
+        user_email=user_email,
         subject=subject,
         start_time=start_time,
         end_time=end_time,
-        attendees=attendee_list,
+        attendees=attendee_objects,
     )
-
 
 # ----------------------------------------------------
 # Update Calendar Event
