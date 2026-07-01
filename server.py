@@ -31,19 +31,32 @@ def list_calendar_events(user_email: str):
 
 @mcp.tool()
 def create_calendar_event(
-    user_email: str,
+    organizer: str,
     subject: str,
     start_time: str,
     end_time: str,
+    attendees: list[str] = [],
 ):
     """
-    Create a new Outlook calendar meeting.
+    Create a meeting with attendees.
     """
+
+    attendee_list = [
+        {
+            "emailAddress": {
+                "address": email
+            },
+            "type": "required"
+        }
+        for email in attendees
+    ]
+
     return create_event(
-        user_email=user_email,
+        user_email=organizer,
         subject=subject,
         start_time=start_time,
         end_time=end_time,
+        attendees=attendee_list,
     )
 
 
@@ -115,17 +128,21 @@ def get_calendar_schedule(
 
 @mcp.tool()
 def auto_schedule_meeting(
-    user_emails: list[str],
+    organizer: str,
+    attendees: list[str],
     subject: str,
     search_start: str,
     search_end: str,
     duration_minutes: int = 60,
 ):
     """
-    Automatically find the first common free slot and create the meeting.
+    Automatically find a common free slot and create the meeting.
     """
+
+    users = [organizer] + attendees
+
     return auto_schedule(
-        user_emails=user_emails,
+        user_emails=users,
         subject=subject,
         search_start=search_start,
         search_end=search_end,
