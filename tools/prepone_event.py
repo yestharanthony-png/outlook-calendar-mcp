@@ -6,11 +6,11 @@ calendar = CalendarService()
 def prepone_event(
     user_email,
     subject,
-    minutes
+    minutes,
 ):
     return calendar.reschedule_event(
         user_email=user_email,
         subject=subject,
         minutes=minutes,
-        action="prepone"
+        action="prepone",
     )
