@@ -1,7 +1,5 @@
 from services.calendar_service import CalendarService
 
-calendar = CalendarService()
-
 
 def update_event(
     user_email,
@@ -13,6 +11,7 @@ def update_event(
     """
     Update an existing calendar event.
     """
+    calendar = CalendarService()
     return calendar.update_event(
         user_email,
         event_id,
