@@ -1,7 +1,5 @@
 from services.calendar_service import CalendarService
 
-calendar = CalendarService()
-
 
 def delete_event(
     user_email,
@@ -10,6 +8,8 @@ def delete_event(
     """
     Delete a calendar event from Outlook.
     """
+    calendar = CalendarService()
+
     return calendar.delete_event(
         user_email,
         event_id,
