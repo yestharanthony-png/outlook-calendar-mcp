@@ -28,9 +28,10 @@ class CalendarService:
     ):
 
         url = (
-            f"{GRAPH_BASE_URL}"
-            f"/users/{user_email}/events"
-        )
+    f"{GRAPH_BASE_URL}"
+    f"/users/{user_email}/calendar/events"
+    f"?$orderby=createdDateTime desc"
+)
 
         return self.graph.get(url)
 

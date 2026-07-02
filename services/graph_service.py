@@ -26,10 +26,12 @@ class GraphService:
 
         logger.info(f"GET -> {url}")
 
+        print("Listing URL:", url)
+
         response = requests.get(
-            url,
-            headers=self.headers
-        )
+        url,
+        headers=self.headers
+    )
 
         print("\n========== GET REQUEST ==========")
         print("URL:", url)
